@@ -1,4 +1,4 @@
-# IncognitoPal
+# IncognitoPal 🌳
 IncognitoPal - privacy-focused chat application
 
 ## Key Features
