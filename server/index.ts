@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import usersRoutes from './routes/users';
+import createTables from './utils/database';
 
 const app = express();
 const port =  process.env.SERVER_PORT || 3000;
@@ -12,5 +13,6 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+  createTables();
+  console.log(`Server running at http://localhost:${port}`);
 });
