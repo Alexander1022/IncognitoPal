@@ -14,6 +14,7 @@ router.post('/', (req: Request, res: Response) => {
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
+        confirmPassword: req.body.confirmPassword,
         created_at: new Date().toISOString(),
         bio: req.body.bio,
     };
