@@ -5,7 +5,7 @@ IncognitoPal - privacy-focused chat application
 
 - [ ] **Secured Authentication**:
   - [ ] Implement secure user authentication with basic user data.
-  - [ ] Add email verification for new users.
+  - [ ] ~~Add email verification for new users.~~
 
 - [ ] **One-to-One Chat**:
   - [ ] Develop the functionality for private, one-to-one conversations.
