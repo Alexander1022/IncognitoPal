@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import usersRoutes from './routes/users';
+import dbCreation from './utils/database';
 import dotenv from 'dotenv';
-import connection from "./utils/dbConnection";
 dotenv.config();
 
 const app = express();
@@ -16,6 +16,6 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-    // TODO: init the database connection here
+  dbCreation;
+  console.log(`Server running at http://localhost:${port}`);
 });

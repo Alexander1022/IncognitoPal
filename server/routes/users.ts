@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import userSchema, { User } from "../models/user";
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
+import Encrypt from "../utils/hashPassword";
 
 const router = Router();
 
@@ -9,7 +10,7 @@ const router = Router();
 router.get('/', async (req: Request, res: Response) => {
     try {
         const dbOpening = await open({
-            filename: process.env.DB_PATH || 'incognito.db',
+            filename: 'database.sqlite',
             driver: sqlite3.Database
         });
 
@@ -30,7 +31,6 @@ router.post('/', async (req: Request, res: Response) => {
         email: req.body.email,
         password: req.body.password,
         confirmPassword: req.body.confirmPassword,
-        created_at: new Date().toISOString(),
         bio: req.body.bio,
     };
 
@@ -40,21 +40,26 @@ router.post('/', async (req: Request, res: Response) => {
     } else {
         try {
             const dbOpening = await open({
-                filename: process.env.DB_PATH || 'incognito.db',
+                filename: 'database.sqlite',
                 driver: sqlite3.Database
             });
 
             const sql = `
-                INSERT INTO users (username, email, password, created_at, bio)
-                VALUES (?, ?, ?, ?, ?)
+                INSERT INTO users (username, email, password, bio)
+                VALUES (?, ?, ?, ?)
             `;
 
-            const values = [user.username, user.email, user.password, user.created_at, user.bio];
+            const hashedPassword = await Encrypt.cryptPassword(user.password);
+            const values = [user.username, user.email, hashedPassword, user.bio];
             await dbOpening.run(sql, values);
 
-            return res.json(user);
+            return res.json({
+                message: 'User successfully created',
+            });
+
         } catch(error) {
-            return res.status(500).json({ message: 'Internal server error' });
+            return res.status(500).json({ message: error });
+            console.log(error);
         }
     }
 });
