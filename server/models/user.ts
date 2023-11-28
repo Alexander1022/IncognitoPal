@@ -14,7 +14,7 @@ const userSchema = z.object({
             path: ['password'],
         }),
     confirmPassword: z.string().min(8).max(32),
-    bio: z.string().max(64).default("This user hasn't written their bio yet."),
+    bio: z.string().max(64),
 })
 .refine((data) => data.password === data.confirmPassword, {
     message: 'Passwords do not match',

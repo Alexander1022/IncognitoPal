@@ -2,10 +2,12 @@ import express, { Request, Response } from 'express';
 import usersRoutes from './routes/users';
 import dbCreation from './utils/database';
 import dotenv from 'dotenv';
+var cors = require('cors')
 dotenv.config();
 
 const app = express();
-const port =  process.env.SERVER_PORT || 3000;
+app.use(cors());
+const port =  process.env.SERVER_PORT || 1234;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

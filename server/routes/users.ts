@@ -6,19 +6,16 @@ import Encrypt from "../utils/hashPassword";
 
 const router = Router();
 
-// fix the db opening
 router.get('/', async (req: Request, res: Response) => {
     try {
         const dbOpening = await open({
             filename: 'database.sqlite',
             driver: sqlite3.Database
         });
-
         const sql = `
             SELECT * FROM users
         `;
         const users = await dbOpening.all(sql);
-
         return res.json(users);
     } catch(error) {
         return res.status(500).json({ message: 'Internal server error' });
@@ -31,12 +28,12 @@ router.post('/', async (req: Request, res: Response) => {
         email: req.body.email,
         password: req.body.password,
         confirmPassword: req.body.confirmPassword,
-        bio: req.body.bio,
+        bio: "This user hasn't written their bio yet."
     };
 
     const result = userSchema.safeParse(user);
     if (!result.success) {
-        return res.status(400).json(result.error);
+        return res.status(400).json(result);
     } else {
         try {
             const dbOpening = await open({
@@ -50,6 +47,7 @@ router.post('/', async (req: Request, res: Response) => {
             const userExists = await dbOpening.get(sqlCheck, user.email);
             
             if (userExists) {
+                console.log('Email already exists');
                 return res.status(400).json({ message: 'Email already exists' });
             }
 
@@ -61,14 +59,13 @@ router.post('/', async (req: Request, res: Response) => {
             const hashedPassword = await Encrypt.cryptPassword(user.password);
             const values = [user.username, user.email, hashedPassword, user.bio];
             await dbOpening.run(sql, values);
-
-            return res.json({
-                message: 'User successfully created',
+            
+            return res.status(200).json({
+                message: 'Done'
             });
 
         } catch(error) {
             return res.status(500).json({ message: error });
-            console.log(error);
         }
     }
 });
