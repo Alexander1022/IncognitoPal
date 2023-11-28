@@ -10,14 +10,11 @@ IncognitoPal - privacy-focused chat application
 - [ ] **One-to-One Chat**:
   - [ ] Develop the functionality for private, one-to-one conversations.
   - [ ] Ensure messages are end-to-end encrypted for security.
+  - [ ] Add a secret key for hashing the messages.
 
 - [ ] **Group Chat**:
   - [ ] Enable users to create and participate in private group conversations.
   - [ ] Implement end-to-end encryption for group chats.
-
-- [ ] **Community Chat**:
-  - [ ] Introduce the feature for public community chats.
-  - [ ] Define chat rooms, topics, or interests for community discussions.
 
 - [ ] **Minimalistic UI**:
   - [ ] Design a sleek and minimalistic user interface for a clean and intuitive user experience.
