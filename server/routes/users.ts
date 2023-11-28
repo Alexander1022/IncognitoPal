@@ -44,6 +44,15 @@ router.post('/', async (req: Request, res: Response) => {
                 driver: sqlite3.Database
             });
 
+            const sqlCheck = `
+                SELECT * FROM users WHERE email = ?
+            `;
+            const userExists = await dbOpening.get(sqlCheck, user.email);
+            
+            if (userExists) {
+                return res.status(400).json({ message: 'Email already exists' });
+            }
+
             const sql = `
                 INSERT INTO users (username, email, password, bio)
                 VALUES (?, ?, ?, ?)
