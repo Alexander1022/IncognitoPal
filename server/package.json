@@ -5,9 +5,12 @@
     "check-password-strength": "^2.0.7",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
     "mailparser": "^3.6.5",
     "mysql": "^2.18.1",
     "mysql2": "^3.6.3",
+    "nodemon": "^3.0.2",
     "sequelize": "^6.35.1",
     "smtp-server": "^3.13.0",
     "sqlite": "^5.1.1",
@@ -17,6 +20,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.19",
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.8.4",
     "@types/smtp-server": "^3.5.8",
     "express": "^4.18.2",
@@ -24,8 +28,9 @@
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "start": "ts-node ./index.ts",
+    "start": "nodemon ./index.ts",
     "build": "tsc",
-    "serve": "node dist/index.js"
+    "serve": "nodemon dist/index.js",
+    "watch": "nodemon"
   }
 }

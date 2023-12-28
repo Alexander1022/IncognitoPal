@@ -1,7 +1,9 @@
+import NavMenu from "./NavMenu";
+
 export default function Home() {
     return (
-        <>
-            <h1>Home</h1>
-        </>
+       <div>
+            <NavMenu />
+       </div>
     );
 }

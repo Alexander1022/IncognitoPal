@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -9,7 +9,7 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import axios from 'axios';
 
-function App() {  
+function App() {    
   return (
       <>
       <Router>
@@ -18,7 +18,7 @@ function App() {
               element={<Home />} 
             />
 
-            <Route path='/login'
+            <Route path='/signin'
               element={<Login />}
             />
 
