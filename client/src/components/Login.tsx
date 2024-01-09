@@ -1,14 +1,14 @@
 import { useState } from "react";
 import Footer from "./Footer";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import Cookies from "universal-cookie";
+import { Link, useNavigate } from "react-router-dom";
+import { setToken } from "../helpers/token";
 
 export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
-    const cookies = new Cookies();
+    const navigate = useNavigate();
 
     const handleChangeUsername = (event: any) => {
       setUsername(event.target.value);
@@ -31,14 +31,13 @@ export default function Login() {
         .then((response) => {
             setMessage('');
             if(response.status === 200) {
-              cookies.set("TOKEN", response.data.token, {
-                path: "/",
-              });
+              setToken(response.data.token);
+              navigate("/");
             }
         })
   
         .catch((error) => {
-            console.log(error.response.data.message);
+            console.log(`I caught this : ${error.response.data.message}`);
             setMessage(error.response.data.message);
         })
     }
@@ -48,11 +47,11 @@ export default function Login() {
                 <div className="min-h-screen flex items-center justify-center">
                     <form onSubmit={handleSubmit} className="bg-white p-8 pb-4 rounded-xl shadow-2xl">
                         <h1 className="text-xl font-semibold mb-4 text-center">🔏</h1>
-                        <p className="text-gray-600 mb-6">Please sign in.</p>
+                        <p className="text-gray-600 mb-6">Sign in to use the service</p>
                         
                         <div className="mb-4">
-                            <input onChange={handleChangeUsername} type="text" placeholder="Username" className="name-input w-full px-4 py-2 border rounded-xl text-gray-700 shadow-lg ocus:outline-none outline-0" />    
-                            <input onChange={handleChangePassword} type="password" placeholder="Password" className="password-input w-full mt-4 px-4 py-2 border rounded-xl text-gray-700 shadow-lg ocus:outline-none outline-0" />
+                            <input onChange={handleChangeUsername} type="text" placeholder="Username" className="name-input w-full px-4 py-2 border rounded-xl text-gray-700 shadow-lg focus:outline-none outline-0" />    
+                            <input onChange={handleChangePassword} type="password" placeholder="Password" className="password-input w-full mt-4 px-4 py-2 border rounded-xl text-gray-700 shadow-lg focus:outline-none outline-0" />
                             {message && (
                               <div className="flex justify-start">
                                 <p className="text-red-500 text-sm mt-3">{message}</p>
