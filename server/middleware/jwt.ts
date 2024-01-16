@@ -24,6 +24,8 @@ export const createJWT = async (id: number, username: string, email: string) => 
 };
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
+    console.log(`Auth middleware is called for ${req.url}`);
+
     try {
         const token = req.header('authorization')?.replace('Bearer ', '');
         

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "./Footer";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { setToken } from "../helpers/token";
 
-export default function Login() {
+export default function Login({isAuth, setIsAuth}: any) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
@@ -32,6 +32,7 @@ export default function Login() {
             setMessage('');
             if(response.status === 200) {
               setToken(response.data.token);
+              setIsAuth(true);
               navigate("/");
             }
         })
@@ -41,6 +42,8 @@ export default function Login() {
             setMessage(error.response.data.message);
         })
     }
+
+    useEffect(() => {}, [isAuth]);
 
     return (
         <div className="bg-green-100">

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getToken } from "../helpers/token";
-import NavMenu from "./NavMenu";
+import Avatar from 'react-avatar';
 import axios from "axios";
 
 export default function Home() {
@@ -32,38 +32,43 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="bg-green-100 min-h-screen">
-            <NavMenu />
-
-            <div className="container mx-auto my-8 p-8 bg-white rounded-xl shadow-2xl">
-                <h1 className="text-3xl font-semibold mb-6 text-center">User Profile</h1>
-
-                <div className="mb-4">
-                    <p className="text-gray-600">
-                        <span className="font-semibold">Username:</span> {username}
-                    </p>
-                </div>
-
-                <div className="mb-4">
-                    <p className="text-gray-600">
-                        <span className="font-semibold">Email:</span> {email}
-                    </p>
-                </div>
-
-                <div className="mb-4">
-                    <p className="text-gray-600">
-                        <span className="font-semibold">Bio:</span> {bio}
-                    </p>
-                </div>
-
-                <div className="flex flex-row space-x-4 tems-center m-5">
-                    <button className="w-full p-5 m-3 bg-blue-100 text-black text-bold rounded-xl">Create a new chat</button>
-                    <button className="w-full p-5 m-3 bg-green-100 text-black text-bold rounded-xl">Add Friend</button>
-                    <button className="w-full p-5 m-3 bg-yellow-100 text-black text-bold rounded-xl">Edit Profile</button>
-                    <button className="w-full p-5 m-3 bg-red-300 text-black text-bold rounded-xl">Delete Profile</button>
-                </div>
-
+        <div className="flex items-center justify-center bg-green-100 min-h-screen">
+        <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
+          <div className="flex items-center mb-6">
+            <div className="rounded-full overflow-hidden mr-4">
+              <Avatar name={username} size="50" round={true} />
             </div>
+            <h1 className="text-2xl font-semibold">{username}</h1>
+          </div>
+  
+          <div className="mb-4">
+            <p className="text-gray-600">
+              <span className="font-semibold">Email:</span> {email}
+            </p>
+          </div>
+  
+          <div className="mb-4">
+            <p className="text-gray-600">
+                {bio}
+            </p>
+          </div>
+  
+          <div className="flex space-x-4 items-center mb-6">
+            <button className="flex-1 py-2 bg-blue-100 text-black font-bold rounded-full">
+              Create a new chat
+            </button>
+            <button className="flex-1 py-2 bg-green-100 text-black font-bold rounded-full">
+              Add Friend
+            </button>
+          </div>
+  
+          <button className="w-full py-2 bg-yellow-100 text-black font-bold rounded-full mb-4">
+            Edit Profile
+          </button>
+          <button className="w-full py-2 bg-red-300 text-black font-bold rounded-full">
+            Delete Profile
+          </button>
         </div>
+      </div>
     );
 }
