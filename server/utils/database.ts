@@ -21,6 +21,14 @@ const dbCreation = db.serialize(() => {
         content TEXT NOT NULL, \
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP \
     )");
+
+    // table for conversations
+    db.run("CREATE TABLE IF NOT EXISTS conversations ( \
+        id INTEGER PRIMARY KEY AUTOINCREMENT, \
+        userOneID INTEGER NOT NULL, \
+        userTwoID INTEGER NOT NULL, \
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP \
+    )");
 });
 
 export default dbCreation;
