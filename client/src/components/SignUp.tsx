@@ -62,7 +62,6 @@ export default function SignUp() {
            <div className="bg-green-100">
                 <div className="min-h-screen flex items-center justify-center">
                     <form onSubmit={handleSubmit} className="bg-white p-8 pb-4 rounded-xl shadow-2xl max-w-md w-full">
-                        <h1 className="text-xl font-semibold mb-4 text-center">🔐</h1>
                         <p className="text-gray-600 mb-6">Sign up now for private messaging</p>
                         
                         <div className="mb-4">

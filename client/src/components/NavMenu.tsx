@@ -20,7 +20,7 @@ export default function NavMenu({ isAuth, setIsAuth }: any) {
     }, [isAuth]);
 
     return (
-        <nav className="bg-green-500 p-4 shadow-xl">
+        <nav className="bg-green-500 p-4 shadow-xl sticky top-0 z-50">
             <div className="container mx-auto flex items-center justify-between">
                 <h1 className="text-white text-xl font-bold">IncognitoPal</h1>
 
