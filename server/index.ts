@@ -12,6 +12,7 @@ const port =  process.env.SERVER_PORT || 1234;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/users', usersRoutes);
+app.use('/conversations', usersRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World! This is IncognitoPal...');

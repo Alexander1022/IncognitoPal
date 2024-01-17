@@ -132,3 +132,30 @@ export const verify = async (req: Request, res: Response) => {
         return res.status(500).json({ message: error });
     }
 };
+
+export const getUser = async (req: Request, res: Response) => {
+    const username = req.params.username;
+
+    try {
+        const dbOpening = await open({
+            filename: 'database.sqlite',
+            driver: sqlite3.Database
+        });
+
+        const sql = `
+            SELECT username, email, bio FROM users WHERE username = ?
+        `;
+
+        const user = await dbOpening.get(sql, username);
+
+        if (!user) {
+            return res.status(400).json({ message: 'User not found.' });
+        }
+
+        return res.status(200).json(user);
+    }
+
+    catch(error) {
+        return res.status(500).json({ message: error });
+    }
+};
