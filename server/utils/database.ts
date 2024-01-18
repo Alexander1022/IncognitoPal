@@ -19,8 +19,8 @@ const dbCreation = db.serialize(() => {
         conversationID INTEGER NOT NULL, \
         senderID INTEGER NOT NULL, \
         content TEXT NOT NULL, \
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP \
-        FOREIGN KEY (conversationID) REFERENCES conversations(id), \
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP, \
+        FOREIGN KEY (conversationID) REFERENCES conversations (id),\
         FOREIGN KEY (senderID) REFERENCES users(id) \
     )");
 
@@ -30,9 +30,9 @@ const dbCreation = db.serialize(() => {
         userOneID INTEGER NOT NULL, \
         userTwoID INTEGER NOT NULL, \
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP, \
+        uniqueKey TEXT NOT NULL, \
         FOREIGN KEY (userOneID) REFERENCES users(id), \
-        FOREIGN KEY (userTwoID) REFERENCES users(id), \
-        unqiueKey TEXT NOT NULL \
+        FOREIGN KEY (userTwoID) REFERENCES users(id) \
     )");
 });
 

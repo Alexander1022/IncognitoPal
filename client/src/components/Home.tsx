@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getToken } from "../helpers/token";
 import Avatar from 'react-avatar';
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Home() {
     const [username, setUsername] = useState('');
@@ -71,7 +72,9 @@ export default function Home() {
 
                 <div className="flex space-x-4 items-center mb-4">
                     <button className="flex-1 py-2 bg-green-100 text-black font-bold rounded-full hover:bg-green-200 transition duration-300">
-                        Add Friend
+                        <Link to="/new-chat">
+                            Create a convo
+                        </Link>
                     </button>
                 </div>
 

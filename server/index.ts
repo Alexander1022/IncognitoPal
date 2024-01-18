@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import usersRoutes from './routes/users';
+import convsRoutes from './routes/conversations';
 import dbCreation from './utils/database';
 import dotenv from 'dotenv';
 var cors = require('cors')
@@ -12,7 +13,7 @@ const port =  process.env.SERVER_PORT || 1234;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/users', usersRoutes);
-app.use('/conversations', usersRoutes);
+app.use('/conversations', convsRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World! This is IncognitoPal...');

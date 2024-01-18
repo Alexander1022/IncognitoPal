@@ -3,7 +3,6 @@ import { z } from 'zod';
 const conversationSchema = z.object({
     userOneID: z.number(),
     userTwoID: z.number(),
-    created_at: z.string(),
     uniqueKey: z.string().min(32).max(32)
 });
 

@@ -28,6 +28,7 @@ export default function NavMenu({ isAuth, setIsAuth }: any) {
                 <div className="flex items-center space-x-4">
                     <Link to="/" className="text-white hover:text-gray-300">Home</Link>
                     <Link to="/new-chat" className="text-white hover:text-gray-300">New Chat</Link>
+                    <Link to="/all-chats" className="text-white hover:text-gray-300">All Chats</Link>
                     <button onClick={logOut} className="text-white hover:text-gray-300">Logout</button>
                 </div>) : (
                 <div className="flex items-center space-x-4">

@@ -13,6 +13,8 @@ import { clearToken, getToken } from './helpers/token';
 import axios from 'axios';
 import { PrivateRoute } from './components/PrivateRoute';
 import NotFound from './components/NotFound';
+import CreateConvo from './components/CreateConvo';
+import ListConvos from './components/ListConvos';
 
 function App() { 
   const [isAuth, setIsAuth] = useState(false);
@@ -56,8 +58,9 @@ function App() {
 
             <Route element={<PrivateRoute isAuth={isAuth} setAuth={setAuth}/>}>
               <Route path='/' element={<Home />} />
-              <Route path='/new-chat' element={<Home />} />
+              <Route path='/new-chat' element={<CreateConvo />} />
               <Route path='/settings' element={<Home />} />
+              <Route path='/all-chats' element={<ListConvos />} />
             </Route>
 
             <Route
