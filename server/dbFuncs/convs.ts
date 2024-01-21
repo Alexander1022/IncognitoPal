@@ -70,6 +70,9 @@ export const getConversations = async (req: Request, res: Response) => {
             driver: sqlite3.Database
         });
 
+        // too complicated for a small app like this
+        // TODO: simplify this query OR use a different made db
+        
         const sql = `
         SELECT conversations.id,
         CASE
@@ -90,8 +93,7 @@ export const getConversations = async (req: Request, res: Response) => {
         `;
         
         const conversations = await dbOpening.all(sql, userID, userID, userID, userID, userID, userID);
-        console.table(conversations);
-
+        
         return res.status(200).json(conversations);
     } catch(error) {
         return res.status(500).json({ message: error });
@@ -99,8 +101,8 @@ export const getConversations = async (req: Request, res: Response) => {
 };
 
 export const getConversation = async (req: Request, res: Response) => {
-    const userOneID = req.params.userOneID;
-    const userTwoID = req.params.userTwoID;
+    const myId = (req as any).userId;
+    const userTwoID = (req as any).query.otherUser;
 
     try {
         const dbOpening = await open({
@@ -109,12 +111,20 @@ export const getConversation = async (req: Request, res: Response) => {
         });
 
         const sql = `
-            SELECT * FROM conversations WHERE userOneID = ? AND userTwoID = ?
+        SELECT c.*, u1.username AS userOneUsername, u2.username AS userTwoUsername
+        FROM conversations c
+        INNER JOIN users u1 ON c.userOneID = u1.id
+        INNER JOIN users u2 ON c.userTwoID = u2.id
+        WHERE (c.userOneID = ? AND c.userTwoID = ?) OR (c.userOneID = ? AND c.userTwoID = ?)
         `;
-        const conversation = await dbOpening.get(sql, userOneID, userTwoID);
-        console.table(conversation);
 
-        return res.status(200).json(conversation);
+        const conversation = await dbOpening.get(sql, myId, userTwoID, userTwoID, myId);
+        const result = {
+            ...conversation,
+            otherUsername: conversation.userOneID === myId ? conversation.userTwoUsername : conversation.userOneUsername
+        };
+
+        return res.status(200).json(result);
     } catch(error) {
         return res.status(500).json({ message: error });
     }

@@ -3,18 +3,19 @@ import { useEffect, useState } from "react";
 import { getToken } from "../helpers/token";
 import Avatar from "react-avatar";
 import { formatDistanceToNow } from 'date-fns';
+import { useNavigate } from "react-router-dom";
 
 // silly way to make it like this 
 // TODO: create a class for all the structures in IncognitoPal
 class Convo {
     id: number;
-    otherUser: number;
+    otherUserId: number;
     otherUsername: string;
     createdAt: string;
 
     constructor(id: number, otherUser: number, otherUsername: string, createdAt: string) {
         this.id = id;
-        this.otherUser = otherUser;
+        this.otherUserId = otherUser;
         this.otherUsername = otherUsername;
         this.createdAt = createdAt;
     }
@@ -22,6 +23,7 @@ class Convo {
 
 export default function ListConvos() {
     const [convos, setConvos] = useState<Convo[]>([]);
+    const navigate = useNavigate();
 
     const fetchAllConvos = () => {
         const token = getToken();
@@ -29,7 +31,6 @@ export default function ListConvos() {
         .then((response) => {
             if(response.status === 200) {
                 setConvos(response.data);
-                console.log(response.data);
             }
         })
         .catch((error) => {
@@ -59,6 +60,10 @@ export default function ListConvos() {
         return formattedDistance;
     }
 
+    const handleOpeningConvo = (convoId: number, otherUserId: number) => {
+        navigate(`/conversations/${convoId}/${otherUserId}`);
+    }
+
     useEffect(() => {
         fetchAllConvos();
     }, []);
@@ -70,7 +75,7 @@ export default function ListConvos() {
                     <h1 className="text-2xl font-semibold mb-4">List of Conversations</h1>
 
                     {convos.map((convo) => (
-                        <div key={convo.id} className="mb-4 border rounded-md overflow-hidden shadow-md">
+                        <div key={convo.id} onClick={() => handleOpeningConvo(convo.id, convo.otherUserId)} className="mb-4 border rounded-md overflow-hidden shadow-md hover:bg-gray-300 hover:cursor-pointer">
                             <div className="flex items-center p-4">
                                 {/* Avatar */}
                                 <Avatar name={convo.otherUsername} size="50" round={true} className="mr-4" />

@@ -15,6 +15,7 @@ import { PrivateRoute } from './components/PrivateRoute';
 import NotFound from './components/NotFound';
 import CreateConvo from './components/CreateConvo';
 import ListConvos from './components/ListConvos';
+import Convo from './components/Convo';
 
 function App() { 
   const [isAuth, setIsAuth] = useState(false);
@@ -61,6 +62,7 @@ function App() {
               <Route path='/new-chat' element={<CreateConvo />} />
               <Route path='/settings' element={<Home />} />
               <Route path='/all-chats' element={<ListConvos />} />
+              <Route path='/conversations/:convoId/:userId' element={<Convo />} />
             </Route>
 
             <Route

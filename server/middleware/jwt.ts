@@ -28,7 +28,6 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
 
     try {
         const token = req.header('authorization')?.replace('Bearer ', '');
-        
         if (!token) {
             return res.status(403).json({ message: "User is not authenticated!" });
         }

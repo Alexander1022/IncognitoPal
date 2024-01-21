@@ -159,3 +159,8 @@ export const getUser = async (req: Request, res: Response) => {
         return res.status(500).json({ message: error });
     }
 };
+
+export const getMyID = async (req: Request, res: Response) => {
+    console.log(`My id is : ${(req as any).userId}`);
+    return res.status(200).json((req as any).userId);
+}
