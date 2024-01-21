@@ -4,7 +4,8 @@ import { getToken } from "../helpers/token";
 import Avatar from "react-avatar";
 import { formatDistanceToNow } from 'date-fns';
 
-
+// silly way to make it like this 
+// TODO: create a class for all the structures in IncognitoPal
 class Convo {
     id: number;
     otherUser: number;
@@ -49,6 +50,15 @@ export default function ListConvos() {
         return `${hours}:${minutes}:${seconds} ${day}-${month}-${year}`;
     }
 
+    const perfectDate = (data: string) => {
+        const utcDate = new Date(data);
+        // this is a specific timezone for Bulgaria, Sofia
+        const timezoneOffset = 120;
+        const targetDate = new Date(utcDate.getTime() + timezoneOffset * 60000);
+        const formattedDistance = formatDistanceToNow(targetDate);
+        return formattedDistance;
+    }
+
     useEffect(() => {
         fetchAllConvos();
     }, []);
@@ -69,7 +79,7 @@ export default function ListConvos() {
                                 <div>
                                     <h2 className="text-lg font-semibold">{convo.otherUsername}</h2>
                                     <p className="text-gray-600">
-                                        Created {formatDistanceToNow(new Date(convo.createdAt))} ago
+                                        Created {perfectDate(convo.createdAt)} ago
                                     </p>
                                 </div>
                             </div>

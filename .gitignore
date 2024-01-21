@@ -3,3 +3,4 @@ node_modules/
 .db
 server/database.sqlite
 server/middleware/.private.key
+.DS_Store
