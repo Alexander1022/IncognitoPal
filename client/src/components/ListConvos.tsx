@@ -4,6 +4,7 @@ import { getToken } from "../helpers/token";
 import Avatar from "react-avatar";
 import { formatDistanceToNow } from 'date-fns';
 import { useNavigate } from "react-router-dom";
+import { perfectDate } from "../helpers/date";
 
 // silly way to make it like this 
 // TODO: create a class for all the structures in IncognitoPal
@@ -37,28 +38,6 @@ export default function ListConvos() {
             console.log(`I caught this : ${error.response.data.message}`);
         })
     };
-
-    const convertDate = (date: string) => {
-        // format: HH:MM:SS DD/MM/YYYY
-        const dateObj = new Date(date);
-        const hours = dateObj.getHours();
-        const minutes = dateObj.getMinutes();
-        const seconds = dateObj.getSeconds();
-        const day = dateObj.getDate();
-        const month = dateObj.getMonth() + 1;
-        const year = dateObj.getFullYear();
-
-        return `${hours}:${minutes}:${seconds} ${day}-${month}-${year}`;
-    }
-
-    const perfectDate = (data: string) => {
-        const utcDate = new Date(data);
-        // this is a specific timezone for Bulgaria, Sofia
-        const timezoneOffset = 120;
-        const targetDate = new Date(utcDate.getTime() + timezoneOffset * 60000);
-        const formattedDistance = formatDistanceToNow(targetDate);
-        return formattedDistance;
-    }
 
     const handleOpeningConvo = (convoId: number, otherUserId: number) => {
         navigate(`/conversations/${convoId}/${otherUserId}`);

@@ -4,6 +4,7 @@ import { getToken } from "../helpers/token";
 import axios from "axios";
 import io, { Socket } from 'socket.io-client';
 import { get } from "http";
+import { perfectDate } from "../helpers/date";
 
 // silly way to make it like this 
 // TODO: create a class for all the structures in IncognitoPal
@@ -182,7 +183,7 @@ export default function Convo() {
                         }`}
                         >
                         <p className="mb-1">{msg.content}</p>
-                        <small className="text-gray-500">{msg.created_at}</small>
+                        <small className="text-gray-500">{perfectDate(msg.created_at)}</small>
                         </div>
                     </div>
                     ))}
