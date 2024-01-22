@@ -27,7 +27,6 @@ export const createConvesation = async (req: Request, res: Response) => {
         const userTwo = await dbOpening.get(usernameCheck, conv.userTwoUsername);
 
         if(!userTwo) {
-            console.log('User does not exist');
             return res.status(404).json({ message: 'User does not exist' });
         }
 
@@ -38,7 +37,6 @@ export const createConvesation = async (req: Request, res: Response) => {
         `;
         const conversationExists = await dbOpening.get(sqlCheck, conv.userOneID, userTwoID);
         if(conversationExists) {
-            console.log('Conversation already exists');
             return res.status(409).json({ message: 'Conversation already exists' });
         }
 

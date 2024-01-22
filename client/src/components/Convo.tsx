@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getToken } from "../helpers/token";
 import axios from "axios";
@@ -31,6 +31,8 @@ export default function Convo() {
     const [otherUsername, setOtherUsername] = useState('');
     const [socket, setSocket] = useState<Socket | null>(null);
     const [myId, setMyId] = useState(0);
+    const messagesContainerRef = useRef<HTMLDivElement | null>(null);
+    const [isScrolledToBottom, setIsScrolledToBottom] = useState(true);
     const token = getToken();
     const { convoId, userId } = useParams();
 
@@ -69,6 +71,12 @@ export default function Convo() {
         getMessages();
         getMyId();
     }, [convoId, otherUsername]);
+
+    useEffect(() => {
+        if (isScrolledToBottom) {
+            messagesContainerRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [messages, isScrolledToBottom]);
 
     useEffect(() => {
         socket?.on('chat message', (msg) => {
@@ -140,6 +148,16 @@ export default function Convo() {
             setMessage('');
         }
     }
+
+    const handleScroll = () => {
+        if(messagesContainerRef.current === null) return;
+        
+        const isAtBottom =
+            messagesContainerRef.current?.scrollTop + messagesContainerRef.current?.clientHeight ===
+            messagesContainerRef.current?.scrollHeight;
+
+        setIsScrolledToBottom(isAtBottom);
+    };
 
     return (
         <div className="flex flex-col items-center justify-center bg-green-100 h-screen">

@@ -16,7 +16,6 @@ export default function NavMenu({ isAuth, setIsAuth }: any) {
     }
 
     useEffect(() => {
-        console.log("isAuth changed:", isAuth);
     }, [isAuth]);
 
     return (

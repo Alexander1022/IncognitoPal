@@ -86,7 +86,6 @@ export const login = async (req: Request, res: Response) => {
         }
 
         const tokenData = createJWT(checkUsername.id, checkUsername.username, checkUsername.email);
-        console.log(tokenData);
         return res.status(200).json((await tokenData));
 
     } catch(error) {
@@ -123,12 +122,10 @@ export const me = async (req: Request, res: Response) => {
 
 export const verify = async (req: Request, res: Response) => {    
     try {
-        console.log(`User verified and its id is: + ${(req as any).userId}`);
         return res.status(200).json({ message: 'User verified' });
     }
 
     catch(error) {
-        console.log(error);
         return res.status(500).json({ message: error });
     }
 };
@@ -161,6 +158,5 @@ export const getUser = async (req: Request, res: Response) => {
 };
 
 export const getMyID = async (req: Request, res: Response) => {
-    console.log(`My id is : ${(req as any).userId}`);
     return res.status(200).json((req as any).userId);
 }
