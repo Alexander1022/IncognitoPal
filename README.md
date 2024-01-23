@@ -3,22 +3,21 @@ IncognitoPal - privacy-focused chat application
 
 ## Key Features
 
-- [ ] **Secured Authentication**:
-  - [ ] Implement secure user authentication with basic user data.
-  - [ ] ~~Add email verification for new users.~~
+- [X] **Secured Authentication**:
+  - [X] Implement secure user authentication with basic user data.
 
-- [ ] **One-to-One Chat**:
-  - [ ] Develop the functionality for private, one-to-one conversations.
-  - [ ] Ensure messages are end-to-end encrypted for security.
-  - [ ] Add a secret key for hashing the messages.
+- [X] **One-to-One Chat**:
+  - [X] Develop the functionality for private, one-to-one conversations.
+  - [X] Ensure messages are end-to-end encrypted for security.
+  - [X] Add a secret key for hashing the messages.
 
 - [ ] **Group Chat**:
   - [ ] Enable users to create and participate in private group conversations.
   - [ ] Implement end-to-end encryption for group chats.
 
-- [ ] **Minimalistic UI**:
-  - [ ] Design a sleek and minimalistic user interface for a clean and intuitive user experience.
-  - [ ] Ensure the user interface highlights key features and remains user-friendly.
+- [X] **Minimalistic UI**:
+  - [X] Design a sleek and minimalistic user interface for a clean and intuitive user experience.
+  - [X] Ensure the user interface highlights key features and remains user-friendly.
 
 ## Additional Tasks
 
