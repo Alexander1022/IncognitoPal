@@ -1,5 +1,5 @@
 # IncognitoPal 🌳
-IncognitoPal - privacy-focused chat application
+IncognitoPal is a privacy-focused chat application built with React for the frontend and Express.js for the server side, using TypeScript.
 
 ## Key Features
 
@@ -11,7 +11,7 @@ IncognitoPal - privacy-focused chat application
   - [X] Ensure messages are end-to-end encrypted for security.
   - [X] Add a secret key for hashing the messages.
 
-- [ ] **Group Chat**:
+- [ ] **Group Chat** ((Work in Progress)):
   - [ ] Enable users to create and participate in private group conversations.
   - [ ] Implement end-to-end encryption for group chats.
 
@@ -24,3 +24,34 @@ IncognitoPal - privacy-focused chat application
 - [ ] **Security Testing**:
   - [ ] Conduct thorough security testing to identify and address vulnerabilities.
   - [ ] Perform penetration testing and code reviews to ensure user data protection.
+
+## Getting Started
+1. Clone the repository.
+```bash
+git clone https://github.com/Alexander1022/IncognitoPal.git
+```
+2. Install dependencies in the project.
+   
+Server:
+```bash
+cd server && npm install
+```
+Client:
+```bash
+cd client && npm install
+```
+
+3. Start the development server.
+
+Server:
+```bash
+cd server && npm start
+```
+
+Client:
+```bash
+cd client && npm start
+```
+
+4. Open your browser and navigate to http://localhost:3000 to use IncognitoPal.
+   
