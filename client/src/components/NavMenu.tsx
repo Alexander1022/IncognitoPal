@@ -19,20 +19,28 @@ export default function NavMenu({ isAuth, setIsAuth }: any) {
     }, [isAuth]);
 
     return (
-        <nav className="bg-green-500 p-4 shadow-xl sticky top-0 z-50">
+        <nav className="bg-white p-4 sticky top-0 z-50">
             <div className="container mx-auto flex items-center justify-between">
-                <h1 className="text-white text-xl font-bold">IncognitoPal</h1>
+                <div className="w-48 h-10 text-center">
+                    <span className="text-[#027000] text-3xl font-normal font-['Barlow'] tracking-wide">
+                        Incognito
+                    </span>
+                    
+                    <span className="text-[#00858D] text-3xl font-normal font-['Barlow'] tracking-wide">
+                        Pal
+                    </span>
+                </div>
 
                 {isAuth ? (
                 <div className="flex items-center space-x-4">
                     <Link to="/" className="text-white hover:text-gray-300">Home</Link>
-                    <Link to="/new-chat" className="text-white hover:text-gray-300">New Chat</Link>
-                    <Link to="/all-chats" className="text-white hover:text-gray-300">All Chats</Link>
-                    <button onClick={logOut} className="text-white hover:text-gray-300">Logout</button>
+                    <Link to="/new-chat" className="text-black hover:text-gray-300">New Chat</Link>
+                    <Link to="/all-chats" className="text-black hover:text-gray-300">All Chats</Link>
+                    <button onClick={logOut} className="text-black hover:text-gray-300">Logout</button>
                 </div>) : (
                 <div className="flex items-center space-x-4">
-                    <Link to="/signin" className="text-white hover:text-gray-300">Login</Link>
-                    <Link to="/signup" className="text-white hover:text-gray-300">Sign Up</Link>        
+                    <Link to="/signin" className="text-black hover:text-gray-500">Login</Link>
+                    <Link to="/signup" className="text-black hover:text-gray-500">Sign Up</Link>        
                 </div>
                 )}
             </div>

@@ -48,18 +48,18 @@ export default function ListConvos() {
     }, []);
 
     return (
-        <div className="flex items-center justify-center bg-green-100 h-screen">
-            <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
-                <div className="p-4">
-                    <h1 className="text-2xl font-semibold mb-4">List of Conversations</h1>
-
+        <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+            <div className="max-w-2xl w-full max-h-full p-6 rounded shadow-md">
+                <h1 className="animate-in fade-in duration-300 text-3xl font-bold mb-6 text-gray-800">Convos List</h1>
+                <div className="overflow-y-auto max-h-80">
                     {convos.map((convo) => (
-                        <div key={convo.id} onClick={() => handleOpeningConvo(convo.id, convo.otherUserId)} className="mb-4 border rounded-md overflow-hidden shadow-md hover:bg-gray-300 hover:cursor-pointer">
+                        <div 
+                            key={convo.id} 
+                            onClick={() => handleOpeningConvo(convo.id, convo.otherUserId)} 
+                            className="animate ease-in-out duration-300 mb-4 border rounded-md overflow-hidden shadow-md hover:bg-gray-300 hover:cursor-pointer"
+                        >
                             <div className="flex items-center p-4">
-                                {/* Avatar */}
                                 <Avatar name={convo.otherUsername} size="50" round={true} className="mr-4" />
-
-                                {/* Conversation details */}
                                 <div>
                                     <h2 className="text-lg font-semibold">{convo.otherUsername}</h2>
                                     <p className="text-gray-600">

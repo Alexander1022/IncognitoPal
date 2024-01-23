@@ -1,33 +1,24 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import background from '../assets/background.gif';
 
 const NotFound = () => {
-  return (
-    <div className="flex flex-col h-screen items-center justify-center relative overflow-hidden">
-      {/* Stars background */}
-      <div className="absolute inset-0 bg-black opacity-75 z-0">
-        {[...Array(50)].map((_, index) => (
-          <div
-            key={index}
-            className="absolute w-1 h-1 bg-white rounded-full"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animation: `twinkle ${(Math.random() * 1.5 + 0.5).toFixed(2)}s linear infinite`,
-            }}
-          ></div>
-        ))}
-      </div>
+  const backgroundStyle = {
+    backgroundImage: `url(${background})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+  };
 
-      <div className="relative z-10 text-white">
-      <h1 className="text-4xl font-bold mb-4">
-            Houston, we have a problem.
-      </h1>
-      <p className="text-lg mb-2">The page you are looking for doesn't exist.</p>
-      <p className="text-md italic mb-8">Imagine how secure it is.</p>
-      <Link to="/" className="text-lg px-6 py-3 bg-white text-black rounded-full hover:bg-gray-300 transition duration-300">
-        Back to the Game
-      </Link>
+  return (
+    <div className="flex flex-col h-view items-center justify-center relative overflow-hidden" style={backgroundStyle}>
+      <div className="flex flex-col h-screen justify-center items-center z-10 text-white">
+        
+        <p className="w-96 mb-5 text-center bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-gray-400 text-4xl font-semibold tracking-wide">Houston, we have a problem!</p>
+        <div className="w-96 mb-1 text-center bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-gray-400 text-9xl font-extrabold tracking-widest">404</div>
+        <div className="w-96 mb-20 text-center text-white text-4xl font-bold tracking-wide">Page not found</div>
+        <Link to="/" className="text-3xl font-bold animate ease-in-out hover:scale-105 px-6 py-3 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-white rounded-full transition duration-300">
+          Go back home
+        </Link>
       </div>
     </div>
   );

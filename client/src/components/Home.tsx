@@ -8,12 +8,9 @@ export default function Home() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [bio, setBio] = useState('');
-    const [copyMessage, setCopyMessage] = useState('');
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(username);
-        setCopyMessage('Copied');
-        setTimeout(() => setCopyMessage(''), 3000);
     };
 
     const fetchData = () => {
@@ -40,52 +37,40 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="flex items-center justify-center bg-green-100 h-screen">
-            <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
-                <div className="flex items-center mb-6">
-                    <div className="rounded-full overflow-hidden mr-4">
-                        <Avatar name={username} size="50" round={true} />
+        <div className="bg-white w-full min-h-view flex items-center justify-center">
+             <div className="max-w-screen-xl container mx-auto mt-40">
+                <div className="bg-white relative shadow-md rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
+                <div className="flex justify-center">
+                    <Avatar name={username} className="rounded-full mx-auto absolute-top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
+                </div>
+                
+                <div className="mt-16">
+                    <h1 className="font-bold text-center text-3xl text-gray-900">{username}</h1>
+                    <p className="text-center text-sm text-gray-400 font-medium">{email}</p>
+                    <div className="my-5 px-6 items-center justify-center">
+                        <a 
+                            onClick={copyToClipboard}
+                            className="text-gray-200 block rounded-lg text-center cursor-pointer font-medium leading-6 px-3 py-3 bg-gray-900 hover:bg-black hover:text-white animate ease-in-out duration-300 hover:scale-105">
+                            Copy
+                            <span className="ml-1 font-bold">
+                                @{username}
+                            </span>
+                        </a>
                     </div>
-                    <h1 className="text-2xl font-semibold">{username}</h1>
-                    <button
-                        onClick={copyToClipboard}
-                        className="ml-2 p-2 bg-green-100 hover:bg-green-200 text-black font-bold rounded-full transition duration-300"
-                    >
-                        Copy
-                    </button>
-                    {copyMessage && (
-                        <span className="text-black text-sm italic ml-2">{copyMessage}</span>
-                    )}
-                </div>
-
-                <div className="mb-4">
-                    <p className="text-gray-600">
-                        <span className="font-semibold">Email:</span> {email}
-                    </p>
-                </div>
-
-                <div className="mb-4">
-                    <p className="text-gray-600">
-                        {bio}
-                    </p>
-                </div>
-
-                <div className="flex space-x-4 items-center mb-4">
-                    <button className="flex-1 py-2 bg-green-100 text-black font-bold rounded-full hover:bg-green-200 transition duration-300">
-                        <Link to="/new-chat">
+                    <div className="flex justify-between space-x-3 items-center h-20 my-5 px-6">
+                        <Link to="/new-chat" className="text-black bg-green-200 hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3">
                             Create a convo
                         </Link>
-                    </button>
+
+                        <Link to="/" className="text-black bg-yellow-200 hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3">
+                            Edit Profile
+                        </Link>
+
+                        <Link to="/" className="text-black bg-red-200 hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3">
+                            Delete Profile
+                        </Link>
+                    </div>
                 </div>
-
-                <div className="flex space-x-4 items-center">
-                    <button className="w-full py-2 bg-yellow-100 text-black font-bold rounded-full hover:bg-yellow-200 transition duration-300">
-                        Edit Profile
-                    </button>
-
-                    <button className="w-full py-2 bg-red-300 text-black font-bold rounded-full hover:bg-red-400 transition duration-300">
-                        Delete Profile
-                    </button>
                 </div>
             </div>
         </div>

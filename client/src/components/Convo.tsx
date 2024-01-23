@@ -5,6 +5,7 @@ import axios from "axios";
 import io, { Socket } from 'socket.io-client';
 import { get } from "http";
 import { perfectDate } from "../helpers/date";
+import Avatar from "react-avatar";
 
 // silly way to make it like this 
 // TODO: create a class for all the structures in IncognitoPal
@@ -161,52 +162,58 @@ export default function Convo() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center bg-green-100 h-screen">
-            <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
-                <div className="p-4">
-                <h1 className="flex text-2xl font-semibold">{otherUsername}</h1>
-                <p className="text-sm text-gray-400 mb-4">End-to-end encryption chat</p>
+        <div className="flex flex-col w-full items-center justify-center max-h-fit p-0 m-0">
+        <div className="w-full bg-gray-100 rounded-xl h-[95vh]">
+        <div className="p-10 flex flex-col h-full">
+            <h1 className="text-2xl font-semibold">{otherUsername}</h1>
+            <p className="text-sm text-gray-400 mb-4">End-to-end encryption chat</p>
 
-                <div className="flex flex-col h-60 overflow-y-auto mb-4 max-h-60">
+            <div className="flex flex-col overflow-y-auto mb-4 flex-grow">
                 {messages.map((msg, index) => (
                     <div
                         key={index}
                         className={`flex ${
-                        msg.senderID === myId ? 'justify-end' : 'justify-start'
-                        } mb-2`}
-                    >
+                        msg.senderID === myId ? 'justify-end items-end' : 'justify-start items-start'
+                        } mb-2 space-x-2`}
+                    >   
+                        {msg.senderID !== myId && (
+                            <Avatar name={otherUsername} size="50" round={true} />
+                        )}
+
                         <div
-                        className={`p-2 rounded-md ${
-                            msg.senderID === myId
-                            ? 'bg-blue-200 text-blue-800 self-end'
-                            : 'bg-gray-200 text-gray-800 self-start'
-                        }`}
+                            className={`p-2 rounded-md ${
+                                msg.senderID === myId
+                                    ? 'bg-[#71C96F] text-black self-end'
+                                    : 'bg-white text-black self-start'
+                            }`}
                         >
-                        <p className="mb-1">{msg.content}</p>
-                        <small className="text-gray-500">{perfectDate(msg.created_at)}</small>
+                            <p className="mb-1">{msg.content}</p>
+                            <small className="text-gray-800 italic">{perfectDate(msg.created_at)}</small>
                         </div>
                     </div>
-                    ))}
+                ))}
+            </div>
 
-                </div>
-
-                <div className="flex items-center">
-                    <input
+            <div className="flex items-center">
+                <button className="border rounded-md p-2 mr-2 text-gray-500">Files</button>
+                <button className="border rounded-md p-2 mr-2 text-gray-500">Image</button>
+                <input
                     type="text"
                     className="flex-grow border rounded-md p-2 mr-2"
                     placeholder="Type your message..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    />
-                    <button
+                />
+                <button
                     className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                     onClick={handleSendingMessage}
-                    >
+                >
                     Send
-                    </button>
-                </div>
-                </div>
+                </button>
             </div>
         </div>
+    </div>
+</div>
+
     );
 }
